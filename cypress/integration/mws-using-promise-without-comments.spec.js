@@ -7,11 +7,15 @@ describe("WebSocket Application", () => {
         var script = win.document.createElement("script");
         script.innerText = manualWebSocket.getScript();
         win.document.head.appendChild(script);
-
         win.mws.track(["ws://127.0.0.1:3030"]);
       }
     }).then(win => {
       let trackedConnection;
+
+      win.mws.when("ws://127.0.0.1:3030").then(connection => {
+        trackedConnection = connection;
+        trackedConnection.readyState = win.mws.readyState.OPEN;
+      });
 
       cy.get("#label")
         .should($el => {
@@ -19,12 +23,6 @@ describe("WebSocket Application", () => {
         })
         .get("#connect")
         .click()
-        .then(() => {
-          trackedConnection = win.mws.trackedConnections.getByUrl(
-            "ws://127.0.0.1:3030"
-          );
-          trackedConnection.readyState = win.mws.readyState.OPEN;
-        })
         .get("#label")
         .should($el => {
           expect($el).to.contain("connected");

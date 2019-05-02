@@ -20,15 +20,6 @@ describe("WebSocket Application", () => {
       let trackedConnection; // ManualWebSocket connection reference
 
       /**
-       * Set WebSocket ready state to `OPEN` when connection is established
-       * In this example - when button `Connect` is clicked
-       */
-      win.mws.when("ws://127.0.0.1:3030").then(connection => {
-        trackedConnection = connection; // Store connection for further actions
-        trackedConnection.readyState = win.mws.readyState.OPEN; // Change readyState from initial `CONNECTING` to `OPEN`
-      });
-
-      /**
        * Connect to WebSocket
        */
       cy.get("#label")
@@ -37,6 +28,12 @@ describe("WebSocket Application", () => {
         })
         .get("#connect")
         .click() // Click triggers `index.html` connect() method
+        .then(() => {
+          trackedConnection = win.mws.trackedConnections.getByUrl(
+            "ws://127.0.0.1:3030"
+          ); // Get tracked connection
+          trackedConnection.readyState = win.mws.readyState.OPEN; // Change readyState from initial `CONNECTING` to `OPEN`
+        })
         .get("#label")
         .should($el => {
           expect($el).to.contain("connected");
@@ -50,9 +47,6 @@ describe("WebSocket Application", () => {
         .then(() => {
           /**
            * When you send `ping` through WebSocket, act as server and return sent message + "pong"
-           *
-           * If you don't have trackedConnection reference, you can get it anytime using:
-           *   trackedConnection = win.mws.trackedConnections.getByUrl("ws://127.0.0.1:3030")
            */
           trackedConnection.addServerScenario("ping", (connection, message) => {
             connection.reciveMessage(message + " pong");
