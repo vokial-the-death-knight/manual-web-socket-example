@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="connect" onclick="connect()">Connect</button>
+    <p id="label">not connected</p>
+    <p id="error" style="color:red">&nbsp;</p>
+    <textarea name="" id="messages" cols="40" rows="20"></textarea>
+    <br />
+    <input type="text" id="input" />
+    <button id="submit" onclick="submit()">Send</button>
+    <script>
+      var ws;
+
+      function connect() {
+        if (!ws) {
+          ws = new WebSocket("ws://127.0.0.1:3030");
+          ws.addEventListener("open", function() {
+            setLabel("connected");
+          });
+
+          ws.addEventListener("message", addMessage);
+
+          ws.addEventListener("close", function(e) {
+            setLabel("closed");
+          });
+
+          ws.addEventListener("error", function() {
+            setError("error");
+          });
+        }
+      }
+
+      function setLabel(label) {
+        var el = document.getElementById("label");
+        el.innerText = label;
+      }
+
+      function setError(error) {
+        var el = document.getElementById("error");
+        el.innerText = error;
+      }
+
+      function addMessage(message) {
+        var el = document.getElementById("messages");
+        el.innerHTML = el.innerHTML + message + "\n";
+      }
+
+      function submit() {
+        var el = document.getElementById("input");
+
+        if (ws) {
+          ws.send(el.value);
+        }
+      }
+    </script>
+  </body>
+</html>

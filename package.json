@@ -1,0 +1,23 @@
+{
+  "name": "cypress-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/.bin/http-server -c 1 -p 3000",
+    "e2e": "./node_modules/.bin/cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baal-cadar/manual-web-socket-example.git"
+  },
+  "author": "Baal Cadar <baal-cadar@swamp.camp>",
+  "homepage": "https://github.com/baal-cadar/manual-web-socket-example#readme",
+  "devDependencies": {
+    "cypress": "^3.2.0",
+    "manual-web-socket": "^2.0.0"
+  },
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}
