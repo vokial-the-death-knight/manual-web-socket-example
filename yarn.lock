@@ -813,10 +813,10 @@ log-update@^1.0.2:
     ansi-escapes "^1.0.0"
     cli-cursor "^1.0.2"
 
-manual-web-socket@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/manual-web-socket/-/manual-web-socket-2.0.0.tgz#a30866abb9a533bcb51a5b89d85bf8ee618a2e42"
-  integrity sha512-36ZC91H+8BKqiW/6Utu/UqSzzIo5wpAJhdtLNvVC0qrW4KmUObjiHdA7QzPYzZqxYT93lvaYB6qKWgf9koOOCA==
+manual-web-socket@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/manual-web-socket/-/manual-web-socket-2.0.1.tgz#398233cdad6a95232116460cddc31b78a0246b9e"
+  integrity sha512-xvPoXg65897AYN3tJMijpJXiY1/lX7Jnzm1jZWojas/7Z2suNyuAcu50bhFpQfmp6xM/4wdpWu82uDLTMKB/XA==
 
 mime-db@1.40.0:
   version "1.40.0"
